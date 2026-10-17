@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رُوَّادُ التَّمَيُّزِ - المنصة التفاعلية الاحترافية</title>
+  <!-- مكتبة تايليند سي إس إس -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- مكتبة الكونفيتي للاحتفال -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- أيقونات فونت أوسوم -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- خطوط جوجل العربية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+        * {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+        }
+        body {
+            background-color: #f0fdf4;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.06) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.03);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(20, 184, 166, 0.15);
+            border-color: rgba(20, 184, 166, 0.4);
+        }
+        .gold-glow {
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.3);
+        }
+        .teal-glow {
+            box-shadow: 0 0 25px -5px rgba(45, 212, 191, 0.3);
+        }
+        .pulse-slow {
+            animation: pulse 3s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes shakeAnim {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .shake:hover {
+            animation: shakeAnim 0.5s infinite;
+        }
+  </style>
+ </head>
+ <body class="text-slate-800 min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white">
+  
+  <!-- شريط الترويسة التفاعلي -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-teal-100 shadow-md">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+     <div class="w-12 h-12 bg-gradient-to-tr from-teal-400 via-emerald-500 to-amber-400 rounded-2xl flex items-center justify-center text-slate-900 font-black text-2xl shadow-lg shadow-teal-500/20 float-anim">
+      📖
+     </div>
+     <div>
+      <h1 class="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-emerald-600 to-amber-600 leading-tight">رُوَّادُ التَّمَيُّزِ</h1>
+      <p class="text-xs text-teal-600 font-semibold">منصة إسلامية تعليمية تفاعلية ممتعة</p>
+     </div>
+    </div>
+    <div class="flex items-center gap-3 sm:gap-6">
+     <div class="bg-white border border-amber-300 px-4 py-1.5 rounded-full flex items-center gap-2.5 gold-glow shadow-sm">
+      <span class="text-amber-500 text-xl animate-bounce"><i class="fa-solid fa-star"></i></span> 
+      <span id="star-count" class="font-black text-amber-600 text-lg">0</span> 
+      <span class="text-xs text-amber-700/80 font-bold">نجوم</span>
+     </div>
+     <button onclick="toggleAudio()" id="audio-btn" title="كتم/تشغيل الصوت" class="w-10 h-10 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-teal-600 transition shadow-sm cursor-pointer"> 
+      <i class="fa-solid fa-volume-high text-lg" id="audio-icon"></i> 
+     </button>
+    </div>
+   </div>
+  </header>
+
+  <!-- القسم الترحيبي -->
+  <section class="relative py-10 px-4 overflow-hidden border-b border-teal-50">
+   <div class="max-w-5xl mx-auto text-center relative z-10">
+    <span class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500/10 to-emerald-500/10 border border-teal-500/30 text-teal-700 text-xs sm:text-sm font-bold px-5 py-2 rounded-full mb-6 pulse-slow shadow-sm"> 
+     <i class="fa-solid fa-sparkles text-amber-500"></i> <span>بوابة التعلم الذكي والممتع</span> 
+    </span>
+    <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight text-slate-900">
+     <span>أهلاً بكم في رحلة</span><br class="hidden sm:inline">
+     <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 via-emerald-600 to-amber-600">المعرفة والإبداع والتسلية</span>
+    </h2>
+    <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-semibold">
+     اختر نشاطك التفاعلي المفضل، واكتشف الدروس، واجمع النجوم الذهبية لتصبح بطل التميز!
+    </p>
+   </div>
+  </section>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="max-w-7xl mx-auto px-4 py-10 flex-grow w-full">
+   
+   <!-- أزرار التبديل -->
+   <div class="flex justify-center mb-10">
+    <div class="glass-panel p-2 rounded-3xl border border-teal-200 flex gap-2 max-w-lg w-full shadow-lg">
+     <button onclick="switchTab('games')" id="tab-btn-games" class="tab-btn flex-1 py-3 px-4 rounded-2xl font-black text-sm transition flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-md cursor-pointer"> 
+      <i class="fa-solid fa-gamepad text-lg"></i><span>الألعاب والتحديات</span> 
+     </button> 
+     <button onclick="switchTab('lessons')" id="tab-btn-lessons" class="tab-btn flex-1 py-3 px-4 rounded-2xl font-bold text-sm transition flex items-center justify-center gap-2.5 text-slate-600 hover:text-slate-900 hover:bg-white/50 cursor-pointer"> 
+      <i class="fa-solid fa-book-bookmark text-lg"></i><span>ملخصات الدروس</span> 
+     </button> 
+     <button onclick="switchTab('badges')" id="tab-btn-badges" class="tab-btn flex-1 py-3 px-4 rounded-2xl font-bold text-sm transition flex items-center justify-center gap-2.5 text-slate-600 hover:text-slate-900 hover:bg-white/50 cursor-pointer"> 
+      <i class="fa-solid fa-trophy text-lg"></i><span>الأوسمة والجوائز</span> 
+     </button>
+    </div>
+   </div>
+
+   <!-- علامة تبويب الألعاب -->
+   <div id="tab-games" class="tab-content">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     
+     <!-- لعبة ربيع الإيمان -->
+     <div class="glass-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group">
+      <div class="absolute top-0 right-0 w-2 h-full bg-pink-500"></div>
+      <div>
+       <div class="flex justify-between items-center mb-4">
+        <span class="bg-pink-500/10 text-pink-700 border border-pink-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-star"></i><span>مسابقات إسلامية</span></span>
+        <span class="text-xs text-slate-500 font-bold bg-slate-100 px-2.5 py-1 rounded-lg">لعبة حركة</span>
+       </div>
+       <div class="text-5xl mb-3 float-anim text-center">🌸⭐</div>
+       <h3 class="font-black text-xl text-slate-900 mb-2 group-hover:text-pink-600 transition">ربيع الإيمان</h3>
+       <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-medium">لعبة تعليمية ممتعة: حرّك الشخصية يمينًا ويسارًا والتقط الإجابة الصحيحة لكل سؤال!</p>
+      </div>
+      <button onclick="openRabieGame()" class="w-full bg-slate-900 hover:bg-pink-500 hover:text-slate-950 text-white font-black py-3 px-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer"><span>ابدأ اللعبة</span><i class="fa-solid fa-play text-sm"></i></button>
+     </div>
+
+     <!-- لعبة السيرة النبوية والتجارة -->
+     <div class="glass-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group">
+      <div class="absolute top-0 right-0 w-2 h-full bg-amber-500"></div>
+      <div>
+       <div class="flex justify-between items-center mb-4">
+        <span class="bg-amber-500/10 text-amber-700 border border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-campground"></i><span>السيرة النبوية</span></span> 
+        <span class="text-xs text-slate-500 font-bold bg-slate-100 px-2.5 py-1 rounded-lg">5 أسئلة</span>
+       </div>
+       <h3 class="font-black text-xl text-slate-900 mb-2 group-hover:text-amber-600 transition">تجارب النبي ﷺ في التجارة</h3>
+       <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-medium">تعرف على رحلات النبي ﷺ التجارية وأمانته مع السيدة خديجة رضي الله عنها.</p>
+      </div>
+      <button onclick="startQuiz('seerah')" class="w-full bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-black py-3 px-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer"><span>ابدأ التحدي</span><i class="fa-solid fa-circle-play text-base"></i></button>
+     </div>
+
+     <!-- لعبة دعوة أهل الطائف -->
+     <div class="glass-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group">
+      <div class="absolute top-0 right-0 w-2 h-full bg-emerald-500"></div>
+      <div>
+       <div class="flex justify-between items-center mb-4">
+        <span class="bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-heart-pulse"></i><span>السيرة والأخلاق</span></span> 
+        <span class="text-xs text-slate-500 font-bold bg-slate-100 px-2.5 py-1 rounded-lg">5 أسئلة</span>
+       </div>
+       <h3 class="font-black text-xl text-slate-900 mb-2 group-hover:text-emerald-600 transition">الصفح الجميل (أهل الطائف)</h3>
+       <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-medium">اكتشف أخلاق العفو والتسامح العظيمة للنبي ﷺ عند رحلته إلى الطائف.</p>
+      </div>
+      <button onclick="startQuiz('taif')" class="w-full bg-slate-900 hover:bg-emerald-500 hover:text-slate-950 text-white font-black py-3 px-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer"><span>ابدأ التحدي</span><i class="fa-solid fa-circle-play text-base"></i></button>
+     </div>
+
+     <!-- لعبة القيم والأخلاق -->
+     <div class="glass-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group">
+      <div class="absolute top-0 right-0 w-2 h-full bg-purple-500"></div>
+      <div>
+       <div class="flex justify-between items-center mb-4">
+        <span class="bg-purple-500/10 text-purple-700 border border-purple-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-book-quran"></i><span>قيم وتربية</span></span> 
+        <span class="text-xs text-slate-500 font-bold bg-slate-100 px-2.5 py-1 rounded-lg">5 أسئلة</span>
+       </div>
+       <h3 class="font-black text-xl text-slate-900 mb-2 group-hover:text-purple-600 transition">الصادق الأمين والأخلاق</h3>
+       <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-medium">مسابقة ممتعة حول صفات نبينا الكريم محمد ﷺ وأخلاقه الحميدة.</p>
+      </div>
+      <button onclick="startQuiz('ethics')" class="w-full bg-slate-900 hover:bg-purple-500 hover:text-slate-950 text-white font-black py-3 px-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer"><span>ابدأ التحدي</span><i class="fa-solid fa-circle-play text-base"></i></button>
+     </div>
+
+     <!-- لعبة التعاون والنمل -->
+     <div class="glass-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group">
+      <div class="absolute top-0 right-0 w-2 h-full bg-rose-500"></div>
+      <div>
+       <div class="flex justify-between items-center mb-4">
+        <span class="bg-rose-500/10 text-rose-700 border border-rose-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-handshake"></i><span>التعاون والقيم</span></span> 
+        <span class="text-xs text-slate-500 font-bold bg-slate-100 px-2.5 py-1 rounded-lg">5 أسئلة</span>
+       </div>
+       <h3 class="font-black text-xl text-slate-900 mb-2 group-hover:text-rose-600 transition">أهمية التعاون والعمل الجماعي</h3>
+       <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-medium">تعلم قيمة التعاون من قصص القرآن الكريم وسنة النبي المصطفى ﷺ.</p>
+      </div>
+      <button onclick="startQuiz('cooperate')" class="w-full bg-slate-900 hover:bg-rose-500 hover:text-slate-950 text-white font-black py-3 px-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer"><span>ابدأ التحدي</span><i class="fa-solid fa-circle-play text-base"></i></button>
+     </div>
+
+    </div>
+   </div>
+
+   <!-- علامة تبويب الدروس -->
+   <div id="tab-lessons" class="tab-content hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     
+     <div onclick="openLessonModal('أوقات الصلاة المباركة', 'العبادات', '• قال الله تعالى: (إن الصلاة كانت على المؤمنين كتاباً موقوتاً).\n• الاستنتاج: لكل صلاة وقت محدد لا يجوز تأخيرها عنه.\n\n• مواقيت الصلاة الخمس بالتفصيل:\n 1️⃣ الفجر: عند طلوع الفجر الصادق.\n 2️⃣ الظهر: عند زوال الشمس عن كبد السماء.\n 3️⃣ العصر: حين يصبح ظل كل شيء مثله.\n 4️⃣ المغرب: عند غروب الشمس تماماً.\n 5️⃣ العشاء: بعد غياب الشفق الأحمر.\n\n• النصيحة للمقصر: الحفاظ عليها في أول وقتها لينال رضا الله ومحبته.')" class="glass-card rounded-3xl p-6 cursor-pointer group">
+      <span class="text-xs font-bold bg-sky-500/10 text-sky-700 border border-sky-500/30 px-3 py-1 rounded-full">العبادات</span>
+      <h3 class="text-xl font-black mt-4 mb-2 text-slate-900 group-hover:text-teal-600 transition">أوقات الصلاة المباركة</h3>
+      <p class="text-slate-600 text-xs leading-relaxed">تعرف على مواقيت الصلوات الخمس وكيفية المحافظة عليها في أوقاتها.</p>
+      <div class="mt-6 flex items-center justify-between text-teal-600 text-xs font-extrabold"><span>اقرأ الملخص</span><i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i></div>
+     </div>
+
+     <div onclick="openLessonModal('النبي محمد ﷺ في التجارة', 'السيرة النبوية', '• كان أبو طالب عم النبي ﷺ يعمل في التجارة.\n• اتجهت رحلاتهم المعتادة للتجارة إلى بلاد الشام.\n• خرج النبي ﷺ مع عمه أول مرة بعمر 12 سنة.\n• أدار تجارة السيدة خديجة بنت خويلد رضي الله عنها لأمانته وصدقه.\n• الخادم والعامل الذي رافق النبي ﷺ هو ميسرة.')" class="glass-card rounded-3xl p-6 cursor-pointer group">
+      <span class="text-xs font-bold bg-amber-500/10 text-amber-700 border border-amber-500/30 px-3 py-1 rounded-full">السيرة النبوية</span>
+      <h3 class="text-xl font-black mt-4 mb-2 text-slate-900 group-hover:text-teal-600 transition">النبي محمد ﷺ في التجارة</h3>
+      <p class="text-slate-600 text-xs leading-relaxed">قصة رحلات النبي ﷺ للشام وأمانته العظيمة في التجارة.</p>
+      <div class="mt-6 flex items-center justify-between text-teal-600 text-xs font-extrabold"><span>اقرأ الملخص</span><i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i></div>
+     </div>
+
+     <div onclick="openLessonModal('النبي ﷺ يرتعي الغنم', 'السيرة النبوية', '• رعى النبي محمد ﷺ الغنم لأهل مكة مقابل قراريط.\n• المغزى والهدف: الاعتماد على النفس والتكسب الحلال.\n• الصفات الكريمة المكتسبة من رعي الغنم:\n 1. الصبر والتحمل.\n 2. الرحمة والرفق بالرعية.\n 3. الأمانة واليقظة.')" class="glass-card rounded-3xl p-6 cursor-pointer group">
+      <span class="text-xs font-bold bg-amber-500/10 text-amber-700 border border-amber-500/30 px-3 py-1 rounded-full">السيرة النبوية</span>
+      <h3 class="text-xl font-black mt-4 mb-2 text-slate-900 group-hover:text-teal-600 transition">النبي ﷺ يرتعي الغنم</h3>
+      <p class="text-slate-600 text-xs leading-relaxed">كيف تعلم النبي الصبر والاعتماد على النفس من رعي الأغنام.</p>
+      <div class="mt-6 flex items-center justify-between text-teal-600 text-xs font-extrabold"><span>اقرأ الملخص</span><i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i></div>
+     </div>
+
+     <div onclick="openLessonModal('الصفح الجميل (دعوة أهل الطائف)', 'السيرة النبوية', '• خرج الرسول ﷺ إلى أهل الطائف ليدعوهم للتوحيد للإسلام.\n• رد أهل الطائف: رفضوا وأذوه بالحجارة حتى سال دمه الشريف.\n• خُلُق النبي: عفا وصفح ولم يدعُ عليهم بل دعا لهم بالهداية.\n• قال الله تعالى: (إن الله يعفو ويغفر لعباده).\n• القدوة الحسنة: المسلم يتخلق بالعفو والتسامح ويرد الإساءة بالصفح.')" class="glass-card rounded-3xl p-6 cursor-pointer group">
+      <span class="text-xs font-bold bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 px-3 py-1 rounded-full">السيرة النبوية</span>
+      <h3 class="text-xl font-black mt-4 mb-2 text-slate-900 group-hover:text-teal-600 transition">الصفح الجميل (دعوة أهل الطائف)</h3>
+      <p class="text-slate-600 text-xs leading-relaxed">أعظم صور العفو والتسامح في رحلة الطائف المباركة.</p>
+      <div class="mt-6 flex items-center justify-between text-teal-600 text-xs font-extrabold"><span>اقرأ الملخص</span><i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i></div>
+     </div>
+
+     <div onclick="openLessonModal('خريطة صفات الصادق الأمين والأمانة', 'قيم وتربية', '• رسولنا الكريم هو محمد صلى الله عليه وسلم.\n• الصلاة عليه: عند ذكر اسمه نقول دائماً (صلى الله عليه وسلم).\n• خريطة مفاهيم الأخلاق النبوية:\n (الصدق - الأمانة - العدل - التسامح - التواضع - المساواة - الصبر - المحبة).\n• اللقب المشهور: كان يلقب بالصادق الأمين لحفظ وإرجاع الأمانات لأصحابها.')" class="glass-card rounded-3xl p-6 cursor-pointer group">
+      <span class="text-xs font-bold bg-purple-500/10 text-purple-700 border border-purple-500/30 px-3 py-1 rounded-full">قيم وتربية</span>
+      <h3 class="text-xl font-black mt-4 mb-2 text-slate-900 group-hover:text-teal-600 transition">خريطة صفات الصادق الأمين</h3>
+      <p class="text-slate-600 text-xs leading-relaxed">تعرف على أخلاق وصفات النبي محمد صلى الله عليه وسلم.</p>
+      <div class="mt-6 flex items-center justify-between text-teal-600 text-xs font-extrabold"><span>اقرأ الملخص</span><i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i></div>
+     </div>
+
+     <div onclick="openLessonModal('سورة الزلزلة العظيمة', 'القرآن الكريم', '• عدد آيات سورة الزلزلة: ٨ آيات كريمة.\n• نوع السورة: مكية (نزلت في مكة المكرمة).\n• الموضوع الرئيسي: تتحدث السورة عن أحداث وتغيرات يوم القيامة الكبرى وتزلزل الأرض وحساب الناس على كل أفعالهم.')" class="glass-card rounded-3xl p-6 cursor-pointer group">
+      <span class="text-xs font-bold bg-teal-500/10 text-teal-700 border border-teal-500/30 px-3 py-1 rounded-full">القرآن الكريم</span>
+      <h3 class="text-xl font-black mt-4 mb-2 text-slate-900 group-hover:text-teal-600 transition">سورة الزلزلة العظيمة</h3>
+      <p class="text-slate-600 text-xs leading-relaxed">ملخص أحكام ومعاني سورة الزلزلة المباركة.</p>
+      <div class="mt-6 flex items-center justify-between text-teal-600 text-xs font-extrabold"><span>اقرأ الملخص</span><i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i></div>
+     </div>
+
+    </div>
+   </div>
+
+   <!-- علامة تبويب الأوسمة -->
+   <div id="tab-badges" class="tab-content hidden">
+    <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-teal-200 text-center mb-8 shadow-sm">
+     <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">خزانة الأوسمة والإنجازات</h3>
+     <p class="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto mb-8 font-medium">أكمل التحديات والألعاب بنجاح لفتح هذه الأوسمة الذهبية الرائعة!</p>
+     
+     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      
+      <div id="badge-seerah" class="opacity-40 grayscale transition-all p-5 rounded-3xl border border-slate-200 bg-white flex flex-col items-center shadow-sm">
+       <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-600 flex items-center justify-center text-3xl mb-3 shadow-inner">🐫</div>
+       <span class="font-black text-xs text-slate-800">وسام السيرة</span>
+       <span class="text-[10px] text-slate-500 mt-1">أتمم التحدي</span>
+      </div>
+
+      <div id="badge-taif" class="opacity-40 grayscale transition-all p-5 rounded-3xl border border-slate-200 bg-white flex flex-col items-center shadow-sm">
+       <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-600 flex items-center justify-center text-3xl mb-3 shadow-inner">🌸</div>
+       <span class="font-black text-xs text-slate-800">وسام الصفح</span>
+       <span class="text-[10px] text-slate-500 mt-1">أتمم التحدي</span>
+      </div>
+
+      <div id="badge-ethics" class="opacity-40 grayscale transition-all p-5 rounded-3xl border border-slate-200 bg-white flex flex-col items-center shadow-sm">
+       <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/40 text-purple-600 flex items-center justify-center text-3xl mb-3 shadow-inner">✨</div>
+       <span class="font-black text-xs text-slate-800">وسام الأمانة</span>
+       <span class="text-[10px] text-slate-500 mt-1">أتمم التحدي</span>
+      </div>
+
+      <div id="badge-cooperate" class="opacity-40 grayscale transition-all p-5 rounded-3xl border border-slate-200 bg-white flex flex-col items-center shadow-sm">
+       <div class="w-16 h-16 rounded-2xl bg-rose-500/20 border border-rose-500/40 text-rose-600 flex items-center justify-center text-3xl mb-3 shadow-inner">🐜</div>
+       <span class="font-black text-xs text-slate-800">وسام التعاون</span>
+       <span class="text-[10px] text-slate-500 mt-1">أتمم التحدي</span>
+      </div>
+
+     </div>
+    </div>
+   </div>
+
+  </main>
+
+  <!-- نافذة مسابقات الأسئلة العادية -->
+  <div id="quiz-modal" class="fixed inset-0 bg-slate-950/65 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+   <div class="glass-panel rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative border border-teal-300 bg-white">
+    <button onclick="closeQuizModal()" class="absolute top-5 left-5 text-slate-500 hover:text-slate-900 text-lg font-bold bg-slate-100 hover:bg-slate-200 w-10 h-10 rounded-2xl flex items-center justify-center transition border border-slate-200 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+    <div class="mb-6">
+     <div class="flex justify-between items-center text-xs font-bold text-slate-500 mb-2.5">
+      <span id="quiz-title-badge" class="bg-teal-500/20 text-teal-800 border border-teal-500/30 px-3 py-1 rounded-full">تحدي تفاعلي</span> 
+      <span id="question-progress-text" class="text-slate-600 font-bold">السؤال 1 من 5</span>
+     </div>
+     <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+      <div id="progress-bar-fill" class="bg-gradient-to-r from-teal-400 to-emerald-500 h-full rounded-full w-0 transition-all duration-300"></div>
+     </div>
+    </div>
+    <div id="quiz-body-content">
+     <h3 id="quiz-question-text" class="text-lg sm:text-xl font-black text-slate-900 mb-6 leading-snug">نص السؤال يظهر هنا...</h3>
+     <div id="quiz-options-container" class="space-y-3 mb-6"></div>
+    </div>
+    <div class="flex items-center justify-between border-t pt-4 border-slate-100">
+     <div id="quiz-feedback-msg" class="text-xs font-bold text-slate-600 flex items-center gap-2"></div>
+    </div>
+   </div>
+  </div>
+
+  <!-- نافذة ملخصات الدروس -->
+  <div id="lesson-modal" class="fixed inset-0 bg-slate-950/65 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+   <div class="glass-panel rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative border border-teal-300 bg-white">
+    <button onclick="closeLessonModal()" class="absolute top-5 left-5 text-slate-500 hover:text-slate-900 text-lg font-bold bg-slate-100 hover:bg-slate-200 w-10 h-10 rounded-2xl flex items-center justify-center transition border border-slate-200 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+    <span id="lesson-modal-cat" class="text-xs font-bold bg-teal-500/10 text-teal-700 border border-teal-500/30 px-3 py-1 rounded-full">التصنيف</span>
+    <h3 id="lesson-modal-title" class="text-xl sm:text-2xl font-black text-slate-900 mt-3 mb-4">عنوان الدرس</h3>
+    <div id="lesson-modal-content" class="text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-line bg-slate-50 p-5 rounded-2xl border border-slate-200 mb-6 max-h-60 overflow-y-auto"></div>
+    <button onclick="closeLessonModal()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-black py-3 rounded-2xl transition shadow-md cursor-pointer">فهمت الدرس ممتاز! 🌟</button>
+   </div>
+  </div>
+
+  <!-- نافذة لعبة ربيع الإيمان -->
+  <div id="rabieModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md hidden items-center justify-center z-50">
+   <div class="w-full h-full sm:w-[95%] sm:h-[95%] sm:max-w-3xl sm:rounded-3xl overflow-hidden bg-white shadow-2xl flex flex-col">
+    <div class="shrink-0 flex items-center justify-between gap-3 bg-slate-900 text-white px-3 py-2" style="padding-top:max(8px, env(safe-area-inset-top))">
+     <button onclick="closeRabieGame()" class="bg-rose-500 hover:bg-rose-600 text-white font-black text-sm px-4 py-2 rounded-xl flex items-center gap-2 shadow-md transition cursor-pointer"><span>رجوع للمنصة</span><i class="fa-solid fa-arrow-left"></i></button>
+     <span class="font-black text-sm text-pink-200">ربيع الإيمان 🌸</span>
+    </div>
+    <iframe id="rabieFrame" title="ربيع الإيمان" class="w-full flex-1 min-h-0 border-0" allow="autoplay"></iframe>
+   </div>
+  </div>
+  <script type="text/plain" id="rabieSrc"><!DOCTYPE html>
+<html lang="ar" dir="rtl" class="w-full h-full m-0 p-0 overflow-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ربيع الإيمان - مسابقات إسلامية</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"><\/script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        html, body {
+            font-family: 'Cairo', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fbcfe8 0%, #fed7aa 50%, #bae6fd 100%);
+            margin: 0; padding: 0; width: 100%; height: 100%; min-height: 100%;
+        }
+        html, body { height: var(--app-h, 100dvh) !important; }
+        body { display: flex; flex-direction: column; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        header, footer { flex-shrink: 0; }
+        main { flex: 1 1 auto; min-height: 0; min-width: 0; width: 100%; }
+        #gameCanvas { display: block; width: 100%; height: 100%; flex: 1 1 auto; }
+        @media (max-width: 640px) {
+            header { padding: 4px 8px !important; gap: 2px; }
+            header h1 { font-size: 12px !important; }
+            header p { font-size: 9px !important; }
+            footer { padding: 4px 8px !important; gap: 2px !important; }
+            footer button { padding: 6px 4px !important; font-size: 13px !important; }
+            #currentQuestionBanner { font-size: 12px !important; padding: 6px 10px !important; line-height: 1.5 !important; }
+            main > div.absolute.top-3 { top: 4px !important; width: 98% !important; }
+        }
+        .bouncing { animation: bounce 2s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+    <script>
+        // ارتفاع الشاشة الفعلي المرئي (يتجاوز مشكلة شريط عنوان كروم في الموبايل)
+        function setAppHeight() {
+            const h = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+            document.documentElement.style.setProperty('--app-h', h + 'px');
+        }
+        setAppHeight();
+        window.addEventListener('resize', setAppHeight);
+        window.addEventListener('orientationchange', () => setTimeout(setAppHeight, 200));
+        if (window.visualViewport) window.visualViewport.addEventListener('resize', setAppHeight);
+    <\/script>
+</head>
+<body class="w-full m-0 p-0 flex flex-col justify-between items-center overflow-hidden bg-gradient-to-br from-pink-100 via-orange-100 to-sky-100">
+
+    <header class="w-full bg-white/95 backdrop-blur-md px-4 sm:px-6 py-2.5 flex justify-between items-center z-10 border-b-4 border-pink-300 shrink-0">
+        <div class="flex items-center gap-2 sm:gap-3">
+            <span class="text-2xl sm:text-3xl">🧺</span>
+            <div>
+                <h1 class="text-sm sm:text-lg font-black text-pink-600 leading-tight">ربيع الإيمان - مسابقات إسلامية</h1>
+                <p class="text-[10px] sm:text-xs text-gray-500 font-bold">لعبة تعليمية ممتعة</p>
+            </div>
+        </div>
+        <div class="flex gap-2 sm:gap-3 items-center">
+            <div class="bg-pink-100 px-3 py-1.5 rounded-full border-2 border-pink-400 text-pink-800 font-black text-xs sm:text-sm shadow-inner">
+                النقاط: <span id="scoreVal">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative w-full flex-1 bg-transparent overflow-hidden cursor-pointer flex flex-col">
+        <div class="absolute top-2 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 z-10 w-11/12 max-w-3xl">
+            <div class="flex items-center gap-2 w-full">
+                <div id="currentQuestionBanner" class="bg-white/95 px-4 py-2.5 rounded-2xl shadow-md border-2 border-pink-400 text-pink-700 font-black text-xs sm:text-sm text-center flex-1 whitespace-normal leading-relaxed overflow-hidden">
+                    السؤال يظهر هنا...
+                </div>
+            </div>
+            <div class="w-full bg-white/80 rounded-full h-2.5 overflow-hidden border border-pink-300 shadow-inner flex justify-between items-center px-1">
+                <div id="timerBar" class="bg-gradient-to-r from-pink-500 to-purple-500 h-1.5 rounded-full w-full transition-all duration-1000"></div>
+                <span id="timerVal" class="text-[10px] font-black text-pink-600 mr-1">25ث</span>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas" class="w-full h-full block flex-1"></canvas>
+        
+        <div id="overlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-20 transition-all duration-300">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-2xl border-4 border-pink-400 max-w-sm sm:max-w-md w-full bouncing">
+                <div id="overlayIcon" class="text-6xl mb-2">⭐</div>
+                <h2 id="overlayTitle" class="text-xl sm:text-2xl font-black text-pink-600 mb-2">أهلاً بك في لعبة ربيع الإيمان!</h2>
+                <p id="overlayDesc" class="text-xs sm:text-sm text-gray-600 mb-4 font-bold">جميع الأسئلة والإجابات مطابقة للمقرر المدرسي!</p>
+                <button id="actionBtn" onclick="startGame()" class="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-black text-base rounded-2xl shadow-lg transform active:scale-95 transition hover:brightness-110 border-b-4 border-pink-700">
+                    ابدأ اللعبة الآن! 🚀
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full bg-white/95 px-4 py-2 flex flex-col gap-1.5 z-10 border-t-4 border-pink-300 shrink-0">
+        <div class="flex justify-between gap-4">
+            <button id="leftBtn" class="flex-1 bg-white active:bg-pink-300 text-pink-700 py-3 rounded-2xl shadow-lg border-b-4 border-pink-300 font-black text-base sm:text-lg flex justify-center items-center transition">
+                ◀️ يسار
+            </button>
+            <button id="rightBtn" class="flex-1 bg-white active:bg-pink-300 text-pink-700 py-3 rounded-2xl shadow-lg border-b-4 border-pink-300 font-black text-base sm:text-lg flex justify-center items-center transition">
+                يمين ▶️
+            </button>
+        </div>
+        <div class="text-center flex justify-center items-center gap-2">
+            <div class="flex flex-col items-center leading-tight text-center">
+                <span class="text-[11px] sm:text-xs font-black text-purple-700 bg-pink-50 px-3 py-0.5 rounded-full shadow-sm border border-pink-200 inline-block">
+                    مريم بنت خميس المقيمية
+                </span>
+                <span class="text-[10px] sm:text-[11px] font-bold text-purple-700 mt-0.5">
+                    مدرسة روضة المعارف ١-١٠
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const scoreVal = document.getElementById('scoreVal');
+        const overlay = document.getElementById('overlay');
+        const overlayIcon = document.getElementById('overlayIcon');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayDesc = document.getElementById('overlayDesc');
+        const actionBtn = document.getElementById('actionBtn');
+        const currentQuestionBanner = document.getElementById('currentQuestionBanner');
+        const timerBar = document.getElementById('timerBar');
+        const timerVal = document.getElementById('timerVal');
+
+        let score = 0;
+        let gameRunning = false;
+        let animationFrameId = null;
+        let timeLeft = 25;
+        let gameTimerInterval = null;
+        let questionLocked = false;
+
+        const questionsWithAnswers = [
+            {
+                question: "العامل الذي كان يساعد النبي صلى الله عليه وسلم في التجارة هو؟",
+                correct: ["ميسرة"],
+                incorrect: ["بلال", "عمرو", "سعد"]
+            },
+            {
+                question: "ما هو عمر النبي صلى الله عليه وسلم عندما خرج في التجارة إلى الشام؟",
+                correct: ["15 سنة"],
+                incorrect: ["30 سنة", "20 سنة", "10 سنوات"]
+            },
+            {
+                question: "عدد آيات سورة الزلزلة المباركة؟",
+                correct: ["8 آيات"],
+                incorrect: ["9 آيات", "7 آيات", "10 آيات"]
+            },
+            {
+                question: "من صفات رسولنا محمد صلى الله عليه وسلم قبل البعثة؟",
+                correct: ["الأمانة والصدق"],
+                incorrect: ["الكذب", "الغضب", "الخيانة"]
+            },
+            {
+                question: "ماذا تستنتج من قوله تعالى: (إن الصلاة كانت على المؤمنين كتاباً موقوتاً)؟",
+                correct: ["لكل صلاة وقت محدد"],
+                incorrect: ["الصلاة بأي وقت", "وقت النوم فقط", "لا أثر للوقت"]
+            },
+            {
+                question: "كيف تتصرف إذا رأيت زميلك يرمي بقايا الطعام في ساحة المدرسة؟",
+                correct: ["أنصح زميلي بأدب"],
+                incorrect: ["أتركه بلا توجيه", "أصرخ في وجهه", "أرمي الطعام معه"]
+            },
+            {
+                question: "في درس النملة، ماذا تعلمنَا من تعاون النمل واجتهاده؟",
+                correct: ["التعاون والعمل الجماعي"],
+                incorrect: ["الكسل والنوم", "التفرّق والخصام", "ترك العمل"]
+            },
+            {
+                question: "كم عدد الصلوات المفروضة في اليوم والليلة؟",
+                correct: ["5 صلوات"],
+                incorrect: ["3 صلوات", "4 صلوات", "6 صلوات"]
+            },
+            {
+                question: "ما حكم تعاون المسلمين في البر والتقوى؟",
+                correct: ["مأمورون به ومحبوب"],
+                incorrect: ["مكروه ومنهي عنه", "محرم شرعاً", "غير مهم"]
+            }
+        ];
+
+        let currentQIndex = 0;
+
+        let player = {
+            x: 0,
+            y: 0,
+            width: 140,
+            height: 58,
+            speed: 12
+        };
+
+        let items = [];
+        let particles = [];
+        let caughtPopups = [];
+        let pendingAnswers = [];
+        let spawnTimer = 0;
+        let gameRunId = 0;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = Math.max(1, Math.round(rect.width * dpr));
+            canvas.height = Math.max(1, Math.round(rect.height * dpr));
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            canvas._logicalWidth = rect.width;
+            canvas._logicalHeight = rect.height;
+            player.y = rect.height - player.height - 15;
+            if (!gameRunning) {
+                player.x = rect.width / 2 - player.width / 2;
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const synth = new Tone.Synth().toDestination();
+        function playSound(note, duration = '8n') {
+            try {
+                if (Tone.context.state !== 'running') {
+                    Tone.start();
+                }
+                synth.triggerAttackRelease(note, duration);
+            } catch (e) {}
+        }
+
+        let moveLeft = false;
+        let moveRight = false;
+
+        const leftBtn = document.getElementById('leftBtn');
+        const rightBtn = document.getElementById('rightBtn');
+
+        leftBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveLeft = true; });
+        leftBtn.addEventListener('touchend', () => moveLeft = false);
+        leftBtn.addEventListener('mousedown', () => moveLeft = true);
+        leftBtn.addEventListener('mouseup', () => moveLeft = false);
+
+        rightBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveRight = true; });
+        rightBtn.addEventListener('touchend', () => moveRight = false);
+        rightBtn.addEventListener('mousedown', () => moveRight = true);
+        rightBtn.addEventListener('mouseup', () => moveRight = false);
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') moveLeft = true;
+            if (e.key === 'ArrowRight' || e.key === 'd') moveRight = true;
+        });
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') moveLeft = false;
+            if (e.key === 'ArrowRight' || e.key === 'd') moveRight = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!gameRunning || questionLocked) return;
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            player.x = mouseX - player.width / 2;
+            if (player.x < 0) player.x = 0;
+            if (player.x > canvas._logicalWidth - player.width) {
+                player.x = canvas._logicalWidth - player.width;
+            }
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!gameRunning || questionLocked) return;
+            const rect = canvas.getBoundingClientRect();
+            const touchX = e.touches[0].clientX - rect.left;
+            player.x = touchX - player.width / 2;
+            if (player.x < 0) player.x = 0;
+            if (player.x > canvas._logicalWidth - player.width) {
+                player.x = canvas._logicalWidth - player.width;
+            }
+        }, { passive: true });
+
+        function setupQuestion() {
+            if (currentQIndex >= questionsWithAnswers.length) {
+                endGame(true);
+                return;
+            }
+            questionLocked = false;
+            items = [];
+            const q = questionsWithAnswers[currentQIndex];
+            currentQuestionBanner.innerText = `السؤال (${currentQIndex + 1}/${questionsWithAnswers.length}): ${q.question}`;
+            
+            pendingAnswers = [];
+            q.correct.forEach(ans => {
+                pendingAnswers.push({ text: ans, isCorrect: true });
+            });
+            q.incorrect.forEach(ans => {
+                pendingAnswers.push({ text: ans, isCorrect: false });
+            });
+
+            pendingAnswers.sort(() => Math.random() - 0.5);
+
+            timeLeft = 25;
+            updateTimerDisplay();
+            if (gameTimerInterval) clearInterval(gameTimerInterval);
+            gameTimerInterval = setInterval(() => {
+                if (!gameRunning || questionLocked) return;
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(gameTimerInterval);
+                    currentQIndex++;
+                    setupQuestion();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            timerVal.innerText = timeLeft + 'ث';
+            const pct = (timeLeft / 25) * 100;
+            timerBar.style.width = pct + '%';
+        }
+
+        function startGame() {
+            if (Tone.context.state !== 'running') {
+                Tone.start();
+            }
+            gameRunId++;
+            score = 0;
+            currentQIndex = 0;
+            scoreVal.innerText = score;
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            gameRunning = true;
+            items = [];
+            particles = [];
+            caughtPopups = [];
+            spawnTimer = 0;
+            resizeCanvas();
+            setupQuestion();
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            gameLoop();
+        }
+
+        function endGame(won) {
+            gameRunning = false;
+            if (gameTimerInterval) clearInterval(gameTimerInterval);
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            if (won) {
+                overlayIcon.innerText = '🏆';
+                overlayTitle.innerText = 'مبروك! أتممت المسابقة بنجاح';
+                overlayDesc.innerText = `لقد جمعت ${score} نقطة بكل إتقان وتفوق!`;
+                actionBtn.innerText = 'العب مرة أخرى 🔄';
+                playSound('C6', '4n');
+            } else {
+                overlayIcon.innerText = '⭐';
+                overlayTitle.innerText = 'انتهت المسابقة';
+                overlayDesc.innerText = `حاول مرة أخرى لتحقيق نتيجة أفضل. مجموع نقاطك: ${score}`;
+                actionBtn.innerText = 'إعادة اللعب 🚀';
+                playSound('G3', '4n');
+            }
+        }
+
+        function spawnItem() {
+            if (pendingAnswers.length === 0 || questionLocked) return;
+
+            const ansObj = pendingAnswers.pop();
+            const padding = 70;
+            const x = Math.random() * (canvas._logicalWidth - padding * 2) + padding;
+            const radius = 38;
+
+            items.push({
+                x: x,
+                y: -50,
+                radius: radius,
+                text: ansObj.text,
+                isCorrect: ansObj.isCorrect,
+                speed: 1.6 + Math.random() * 0.8,
+                hitState: null,
+                hitTimer: 0,
+                qIndex: currentQIndex
+            });
+        }
+
+        function createParticles(x, y, isCorrect) {
+            const color = isCorrect ? '#22c55e' : '#ef4444';
+            for (let i = 0; i < 12; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 5,
+                    vy: (Math.random() - 0.5) * 5,
+                    radius: Math.random() * 4 + 2,
+                    color: color,
+                    alpha: 1
+                });
+            }
+        }
+
+        function getLines(ctx, text, maxWidth) {
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                let width = ctx.measureText(currentLine + " " + words[i]).width;
+                if (width < maxWidth) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        function update() {
+            if (!gameRunning) return;
+
+            if (moveLeft && !questionLocked) {
+                player.x -= player.speed;
+            }
+            if (moveRight && !questionLocked) {
+                player.x += player.speed;
+            }
+            if (player.x < 0) player.x = 0;
+            if (player.x > canvas._logicalWidth - player.width) {
+                player.x = canvas._logicalWidth - player.width;
+            }
+
+            if (!questionLocked) {
+                spawnTimer++;
+                if (spawnTimer > 80 && pendingAnswers.length > 0) {
+                    spawnItem();
+                    spawnTimer = 0;
+                }
+            }
+
+            for (let i = items.length - 1; i >= 0; i--) {
+                let item = items[i];
+                if (!item) continue;
+                
+                if (item.hitState) {
+                    item.hitTimer++;
+                    if (item.hitTimer > 15) {
+                        items.splice(i, 1);
+                    }
+                    continue;
+                }
+
+                item.y += item.speed;
+
+                // منطقة التقاط أصغر من شكل السلة: فتحة السلة فقط، وبهامش من الجوانب
+                const hitX = player.x + 18;
+                const hitW = player.width - 36;
+                const hitY = player.y + 8;
+                const hitH = 22;
+                const hitR = item.radius * 0.6; // نتجاهل حواف الفقاعة الخارجية
+                let closestX = Math.max(hitX, Math.min(item.x, hitX + hitW));
+                let closestY = Math.max(hitY, Math.min(item.y, hitY + hitH));
+                let distanceX = item.x - closestX;
+                let distanceY = item.y - closestY;
+                let distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+
+                if (distanceSquared < (hitR * hitR)) {
+                    if (item.isCorrect) {
+                        item.hitState = 'correct';
+                        score += 10;
+                        scoreVal.innerText = score;
+                        playSound('E5', '8n');
+                        createParticles(item.x, item.y, true);
+                        caughtPopups.push({
+                            text: "+10 ممتاز!",
+                            x: item.x,
+                            y: item.y,
+                            alpha: 1,
+                            color: '#22c55e'
+                        });
+
+                        questionLocked = true;
+                        items = [];
+                        if (gameTimerInterval) clearInterval(gameTimerInterval);
+                        const runId = gameRunId;
+                        setTimeout(() => {
+                            if (runId !== gameRunId || !gameRunning) return;
+                            currentQIndex++;
+                            setupQuestion();
+                        }, 1200);
+                        break; // items تم تفريغها، نوقف الحلقة لتجنب الخطأ الذي كان يعلّق اللعبة
+
+                    } else {
+                        item.hitState = 'incorrect';
+                        score = Math.max(0, score - 5);
+                        scoreVal.innerText = score;
+                        playSound('C3', '8n');
+                        createParticles(item.x, item.y, false);
+                        caughtPopups.push({
+                            text: "خطأ (-5)",
+                            x: item.x,
+                            y: item.y,
+                            alpha: 1,
+                            color: '#ef4444'
+                        });
+                        setTimeout(() => {
+                            const index = items.indexOf(item);
+                            if (index > -1) items.splice(index, 1);
+                        }, 250);
+                    }
+                }
+
+                if (item.y > canvas._logicalHeight + item.radius) {
+                    items.splice(i, 1);
+                    // الإجابة الصحيحة التي فاتت تعود للنزول من جديد
+                    if (item.isCorrect && item.qIndex === currentQIndex && !questionLocked) {
+                        pendingAnswers.push({ text: item.text, isCorrect: true });
+                        spawnTimer = 40; // فاصل قصير قبل عودتها
+                    }
+                }
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.03;
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            for (let i = caughtPopups.length - 1; i >= 0; i--) {
+                let pop = caughtPopups[i];
+                pop.y -= 1.5;
+                pop.alpha -= 0.025;
+                if (pop.alpha <= 0) {
+                    caughtPopups.splice(i, 1);
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas._logicalWidth, canvas._logicalHeight);
+
+            // رسم السلة الكبيرة والواضحة (بدون مستطيل خلفي نهائياً)
+            ctx.save();
+            ctx.shadowColor = 'rgba(219, 39, 119, 0.3)';
+            ctx.shadowBlur = 15;
+            
+            // سلة منسوجة بجمالية عالية
+            ctx.fillStyle = '#d97706'; // لون خشبي دافئ
+            ctx.beginPath();
+            ctx.roundRect(player.x, player.y + 10, player.width, player.height - 10, 12);
+            ctx.fill();
+
+            // حافة السلة العلويّة
+            ctx.fillStyle = '#b45309';
+            ctx.beginPath();
+            ctx.roundRect(player.x - 4, player.y, player.width + 8, 14, 7);
+            ctx.fill();
+
+            // مقبض السلة (العروة)
+            ctx.strokeStyle = '#92400e';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(player.x + player.width / 2, player.y, 24, Math.PI, 0, false);
+            ctx.stroke();
+
+            // أيقونة السلة بالداخل
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 24px "Cairo", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🧺', player.x + player.width / 2, player.y + player.height / 2 + 6);
+            ctx.restore();
+
+            for (let item of items) {
+                ctx.save();
+                ctx.shadowColor = 'rgba(0,0,0,0.15)';
+                ctx.shadowBlur = 8;
+
+                let fillColor = '#fef08a';
+                let textColor = '#713f12';
+
+                if (item.hitState === 'correct') {
+                    fillColor = '#22c55e';
+                    textColor = '#ffffff';
+                } else if (item.hitState === 'incorrect') {
+                    fillColor = '#ef4444';
+                    textColor = '#ffffff';
+                }
+
+                ctx.fillStyle = fillColor;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 4;
+
+                ctx.beginPath();
+                ctx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = textColor;
+                ctx.font = 'bold 12px "Cairo", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                const lines = getLines(ctx, item.text, item.radius * 1.5);
+                if (lines.length === 1) {
+                    ctx.fillText(lines[0], item.x, item.y);
+                } else {
+                    ctx.fillText(lines[0], item.x, item.y - 7);
+                    ctx.fillText(lines[1], item.x, item.y + 9);
+                }
+                ctx.restore();
+            }
+
+            for (let p of particles) {
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            for (let pop of caughtPopups) {
+                ctx.save();
+                ctx.globalAlpha = pop.alpha;
+                ctx.fillStyle = pop.color;
+                ctx.font = 'bold 16px "Cairo", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(pop.text, pop.x, pop.y);
+                ctx.restore();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            if (gameRunning) {
+                animationFrameId = requestAnimationFrame(gameLoop);
+            }
+        }
+    <\/script>
+</body>
+</html></script>
+
+  <!-- تذييل الصفحة -->
+  <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 py-5 px-4 mt-12 text-xs font-semibold">
+   <div class="max-w-7xl mx-auto flex justify-between items-start gap-4" dir="rtl">
+    <div class="text-right leading-relaxed">
+     <p class="text-teal-400 font-black">مريم بنت خميس المقيمية</p>
+     <p>مدرسة روضة المعارف ١-١٠</p>
+    </div>
+   </div>
+  </footer>
+
+  <script>
+    // --- حالة التطبيق العامة ---
+    let totalStars = 0;
+    let soundEnabled = true;
+    let audioCtx = null;
+    let unlockedBadges = { seerah: false, taif: false, ethics: false, cooperate: false };
+
+    // تشغيل الصوت التفاعلي عبر Web Audio API
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+            initAudio();
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'pop') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.exponentialRampToValueAtTime(700, now + 0.15);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+                osc.start(now);
+                osc.stop(now + 0.15);
+            } else if (type === 'success') {
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                    const subOsc = audioCtx.createOscillator();
+                    const subGain = audioCtx.createGain();
+                    subOsc.type = 'triangle';
+                    subOsc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                    subGain.gain.setValueAtTime(0.15, now + idx * 0.08);
+                    subGain.gain.linearRampToValueAtTime(0.01, now + idx * 0.08 + 0.2);
+                    subOsc.connect(subGain);
+                    subGain.connect(audioCtx.destination);
+                    subOsc.start(now + idx * 0.08);
+                    subOsc.stop(now + idx * 0.08 + 0.2);
+                });
+            } else if (type === 'error') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            }
+        } catch (e) {
+            console.debug('خطأ في الصوت:', e);
+        }
+    }
+
+    function toggleAudio() {
+        soundEnabled = !soundEnabled;
+        const icon = document.getElementById('audio-icon');
+        icon.className = soundEnabled ? 'fa-solid fa-volume-high text-lg' : 'fa-solid fa-volume-xmark text-lg text-rose-500';
+    }
+
+    // --- التبديل بين علامات التبويب ---
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.className = "tab-btn flex-1 py-3 px-4 rounded-2xl font-bold text-sm transition flex items-center justify-center gap-2.5 text-slate-600 hover:text-slate-900 hover:bg-white/50 cursor-pointer";
+        });
+        
+        document.getElementById('tab-' + tabId).classList.remove('hidden');
+        const activeBtn = document.getElementById('tab-btn-' + tabId);
+        activeBtn.className = "tab-btn flex-1 py-3 px-4 rounded-2xl font-black text-sm transition flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-md cursor-pointer";
+        playSound('pop');
+    }
+
+    // --- قاعدة بيانات الأسئلة والتحديات ---
+    const quizData = {
+        seerah: [
+            { question: "إلى أين كانت تتجه رحلات قريش للتجارة في الشتاء والصيف؟", options: [" إلى بلاد الشام واليمن", " إلى بلاد الرمال", " إلى الإسكندرية", " إلى العراق"], correct: 0 },
+            { question: "في أي عمر سافر النبي ﷺ مع عمه أبي طالب أول مرة للتجارة؟", options: [" عمر ٧ سنوات", " عمر ١٢ سنة", " عمر ٢٠ سنة", " عمر ٢٥ سنة"], correct: 1 },
+            { question: "من هو عم النبي الذي كان يرعاه ويكفله بعد وفاة جده؟", options: [" أبو لهب", " أبو طالب", " العباس", " حمزة"], correct: 1 },
+            { question: "من هي السيدة الكريمة التي أدار النبي تجارتها لأمانته وصدقه؟", options: [" خديجة بنت خويلد رضي الله عنها", " عائشة رضي الله عنها", " فاطمة الزهراء", " أم سلمة"], correct: 0 },
+            { question: "ما هو الخادم الذي رافق النبي ﷺ في رحلة التجارة؟", options: [" ميسرة", " بلال بن رباح", " زيد بن حارثة", " عمار بن ياسر"], correct: 0 }
+        ],
+        taif: [
+            { question: "إلى أية مدينة ذهب النبي ﷺ لدعوة أهلها للإسلام فآذوه؟", options: [" مدينة الطائف", " مدينة مدين", " مدينة الخرج", " مدينة تبوك"], correct: 0 },
+            { question: "كيف رد أهل الطائف على دعوة النبي محمد ﷺ؟", options: [" استقبلُوه بالترحيب", " آتوه بالهدايا", " رفضوا وأذوه بالحجارة حتى سال دمه", " أسلموا جميعاً فوراً"], correct: 2 },
+            { question: "ما موقف النبي ﷺ عندما أتاه ملك الجبال ليطبق الأخشبين على أهل الطائف؟", options: [" طلب إهلاكهم فوراً", " عفا وصفح ودعا لهم بالهداية", " صمت ولم يرد", " غضب شديداً"], correct: 1 },
+            { question: "ما هي الآية الكريمة التي تبين خلق العفو؟", options: [" إن الله يعفو ويغفر لعباده", " ولا تحسبن الله غافلاً", " والكاظمين الغيظ والعافين عن الناس", " قل أعوذ برب الفلق"], correct: 2 },
+            { question: "الصفة النبوية العظيمة التي ظهرت في قصة الطائف هي:", options: [" الصبر والعفو والرحمة", " الشدة والقسوة", " الانتقام السريع", " الابتعاد"], correct: 0 }
+        ],
+        ethics: [
+            { question: "بماذا كان يُلقب النبي محمد ﷺ قبل البعثة لحفظه الأمانات؟", options: [" الصادق الأمين", " الشجاع", " الكريم", " القوي"], correct: 0 },
+            { question: "ماذا نقول دائماً عند ذكر اسم نبينا محمد صلى الله عليه وسلم؟", options: [" عليه الصلاة والسلام", " صباح الخير", " مرحبا", " لا شيء"], correct: 0 },
+            { question: "من أخلاق المسلم الصادق:", options: [" الكذب في الحديث", " إخلاف الوعد", " قول الصدق وأداء الأمانة", " خيانة المعاهد"], correct: 2 },
+            { question: "خريطة مفاهيم الأخلاق النبوية تشمل:", options: [" الصدق والأمانة والتسامح", " الغش والخداع", " التكبر والغرور", " الإساءة للآخرين"], correct: 0 },
+            { question: "من صفات المؤمن التقي:", options: [" يحب لغيره ما يحب لنفسه", " يؤذي الجيران", " يغش في البيع", " يتكبر على الناس"], correct: 0 }
+        ],
+        cooperate: [
+            { question: "ما هي ثمرة التعاون والعمل الجماعي بين الأفراد؟", options: [" إنجاز الأعمال بسهولة ونجاح", " التأخير والكسل", " الخصومة والعداوة", " التباطؤ"], correct: 0 },
+            { question: "من الأمثلة الحية على التعاون في الطبيعة:", options: [" النحل والنمل في بناء خلاياها ومساكنها", " الحيوانات المفترسة", " الطيور المهاجرة لوحدها", " الأسماك الكبيرة"], correct: 0 },
+            { question: "قال الله تعالى في سورة المائدة: (وتعاونوا على...)", options: [" البر والتقوى ولا تعاونوا على الإثم والعدوان", " الكسل والتواني", " الظلم والعدوان", " اللعب الدائم"], correct: 0 },
+            { question: "لماذا يحثنا الإسلام على التعاون؟", options: [" لنشر المحبة وقوة المجتمع", " لزيادة التنافس السلبي", " لإظهار القوة", " لشغل الوقت"], correct: 0 },
+            { question: "التعاون الصادق يبني:", options: [" مجتمعات متلاحمة قوية ومحبوبة", " مجتمعات ضعيفة", " تفكك أسري", " خصومات مستمرة"], correct: 0 }
+        ]
+    };
+
+    let currentQuizType = null;
+    let currentQuestionIdx = 0;
+    let currentScore = 0;
+
+    function startQuiz(type) {
+        currentQuizType = type;
+        currentQuestionIdx = 0;
+        currentScore = 0;
+        document.getElementById('quiz-modal').classList.remove('hidden');
+        document.getElementById('quiz-modal').classList.add('flex');
+        loadQuestion();
+        playSound('pop');
+    }
+
+    function closeQuizModal() {
+        document.getElementById('quiz-modal').classList.remove('flex');
+        document.getElementById('quiz-modal').classList.add('hidden');
+    }
+
+    function loadQuestion() {
+        const questions = quizData[currentQuizType];
+        if (currentQuestionIdx >= questions.length) {
+            finishQuiz();
+            return;
+        }
+
+        const q = questions[currentQuestionIdx];
+        document.getElementById('question-progress-text').innerText = `السؤال ${currentQuestionIdx + 1} من ${questions.length}`;
+        document.getElementById('progress-bar-fill').style.width = `${((currentQuestionIdx + 1) / questions.length) * 100}%`;
+        document.getElementById('quiz-question-text').innerText = q.question;
+
+        const container = document.getElementById('quiz-options-container');
+        container.innerHTML = '';
+        document.getElementById('quiz-feedback-msg').innerHTML = '';
+
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = "w-full text-right p-4 rounded-2xl bg-slate-50 hover:bg-teal-50 border border-slate-200 hover:border-teal-300 font-bold text-slate-800 transition flex items-center justify-between shadow-sm cursor-pointer";
+            btn.innerHTML = `<span>${opt}</span> <i class="fa-solid fa-chevron-left text-xs text-slate-400"></i>`;
+            btn.onclick = () => checkAnswer(idx, q.correct);
+            container.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selectedIdx, correctIdx) {
+        const buttons = document.getElementById('quiz-options-container').children;
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+            if (i === correctIdx) {
+                buttons[i].className = "w-full text-right p-4 rounded-2xl bg-emerald-100 border border-emerald-400 font-bold text-emerald-900 flex items-center justify-between shadow-sm";
+            } else if (i === selectedIdx) {
+                buttons[i].className = "w-full text-right p-4 rounded-2xl bg-rose-100 border border-rose-400 font-bold text-rose-900 flex items-center justify-between shadow-sm";
+            }
+        }
+
+        const msgDiv = document.getElementById('quiz-feedback-msg');
+        if (selectedIdx === correctIdx) {
+            currentScore += 20;
+            totalStars += 5;
+            document.getElementById('star-count').innerText = totalStars;
+            msgDiv.innerHTML = '<span class="text-emerald-600 font-black text-sm"><i class="fa-solid fa-circle-check"></i> إجابة صحيحة! أحسنت (+5 نجوم)</span>';
+            playSound('success');
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+            }
+        } else {
+            msgDiv.innerHTML = '<span class="text-rose-600 font-black text-sm"><i class="fa-solid fa-circle-xmark"></i> إجابة خاطئة، حاول في السؤال القادم!</span>';
+            playSound('error');
+        }
+
+        currentQuestionIdx++;
+        setTimeout(() => {
+            loadQuestion();
+        }, 1600);
+    }
+
+    function finishQuiz() {
+        unlockedBadges[currentQuizType] = true;
+        const badgeEl = document.getElementById('badge-' + currentQuizType);
+        if (badgeEl) {
+            badgeEl.classList.remove('opacity-40', 'grayscale');
+            badgeEl.classList.add('gold-glow', 'border-amber-400', 'bg-amber-50/50');
+        }
+
+        const container = document.getElementById('quiz-body-content');
+        container.innerHTML = `
+            <div class="text-center py-6">
+                <div class="text-6xl mb-4 animate-bounce">🏆</div>
+                <h3 class="text-2xl font-black text-slate-900 mb-2">أنهيت التحدي بنجاح تام!</h3>
+                <p class="text-slate-600 font-bold text-sm mb-4">حصلت على مجموع درجات: ${currentScore} نقطة ونلت وسام التميز!</p>
+                <button onclick="closeQuizModal()" class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-black px-8 py-3 rounded-2xl shadow-lg cursor-pointer">رائع جداً 🌟</button>
+            </div>
+        `;
+        document.getElementById('question-progress-text').innerText = 'انتهى التحدي';
+        document.getElementById('progress-bar-fill').style.width = '100%';
+        document.getElementById('quiz-feedback-msg').innerHTML = '';
+        playSound('success');
+        if (typeof confetti === 'function') {
+            confetti({ particleCount: 100, spread: 100, origin: { y: 0.5 } });
+        }
+    }
+
+    // --- نافذة الدروس ---
+    function openLessonModal(title, category, text) {
+        document.getElementById('lesson-modal-title').innerText = title;
+        document.getElementById('lesson-modal-cat').innerText = category;
+        document.getElementById('lesson-modal-content').innerText = text;
+        document.getElementById('lesson-modal').classList.remove('hidden');
+        document.getElementById('lesson-modal').classList.add('flex');
+        playSound('pop');
+    }
+
+    function closeLessonModal() {
+        document.getElementById('lesson-modal').classList.remove('flex');
+        document.getElementById('lesson-modal').classList.add('hidden');
+    }
+
+    // --- لعبة ربيع الإيمان ---
+    function openRabieGame() {
+        const m = document.getElementById('rabieModal');
+        document.getElementById('rabieFrame').srcdoc = document.getElementById('rabieSrc').textContent.split('<\\/script>').join('<' + '/script>');
+        m.classList.remove('hidden');
+        m.classList.add('flex');
+        playSound('pop');
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.getElementById('rabieModal').classList.contains('hidden')) closeRabieGame(); });
+    function closeRabieGame() {
+        const m = document.getElementById('rabieModal');
+        document.getElementById('rabieFrame').srcdoc = '';
+        m.classList.remove('flex');
+        m.classList.add('hidden');
+    }
+  </script>
+ </body>
+</html>
